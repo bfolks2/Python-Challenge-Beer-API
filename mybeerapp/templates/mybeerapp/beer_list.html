@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Beer List (add support to link to user)</h1>
+
+  {% for beer in beers %}
+    <p>{{beer.name}}</p>
+    {% for rating in beer.ratings.all %}
+      <p>{{rating.average}}%</p>
+    {% endfor %}
+  {% endfor %}
+
+{% endblock %}
