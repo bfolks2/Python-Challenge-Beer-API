@@ -20,5 +20,7 @@ from mybeerapp import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/', include('accounts.urls', namespace='accounts')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^mybeerapp/', include('mybeerapp.urls')),
 ]

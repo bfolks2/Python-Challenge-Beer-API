@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h1>This is the home page</h1>
-  <h3><a href="{% url 'mybeerapp:beer_list' %}">Click Here For the Beer List</a></h3>
+  <div class="jumbotron">
+    <h1>Home Page</h1>
+    <h3>This website is purely functional.  Unlike its creator, it will not win any beauty contests :)</h3>
+    <h3>Users can register profiles, log in/out, and create/rate items.  Once logged in, each user can track
+    the items created by him/herself by clicking on the "@username" link in the upper right of the screeen.
+    To prevent alcoholism, only 1 item can be created per user, per day</h3>
+  </div>
+  <div class="jumbotron">
+    <h2>Every Beer Ever logged on this site is listed below:</h2>
+      {% for beer in beers %}
+        <p>{{beer.name}}</p>
+      {% endfor %}
+  </div>
 {% endblock %}

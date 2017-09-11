@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% if registered %}
+    <h1>Thank you for signing up!</h1>
+    <h3><a href="{% url 'accounts:user_login' %}">Login</a> to start boozing!</h3>
+  {% elif user.is_authenticated %}
+    <h1>You are already registered and logged in.</h1>
+    <h2>Logout to register another account.</h2>
+  {% else %}
+    {% if error %}
+      <h1 class='bg-warning'>Sign Up Credentials were not correct.  Try Again</h1>
+    {% endif %}
+    <div class="jumbotron">
+      <h2>Please Register Below:</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{usercreateform.as_p}}
+        <input type="submit" name="" value="Sign Up">
+      </form>
+    </div>
+  {% endif %}
+{% endblock %}

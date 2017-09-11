@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.text import slugify #remove any characters that are not alphanuermica, /'s, or -'s
+from accounts.models import User
 
 # Create your models here.
 
@@ -15,6 +16,7 @@ class Glass(models.Model):
 
 
 class Beer(models.Model):
+    user=models.ForeignKey(User, related_name='beers', default=User)
     name=models.CharField(max_length=256)
     slug=models.SlugField(unique=True, allow_unicode=True, default='')
     calories=models.PositiveIntegerField()
@@ -30,8 +32,8 @@ class Beer(models.Model):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
-    def get_absolute_url(self):
-        return reverse('mybeerapp:details', kwargs={'slug':self.slug})
+    # def get_absolute_url(self):
+    #     return reverse('mybeerapp:details', kwargs={'slug':self.slug,'username':self.user.username,'pk':self.pk})
 
 
 class Rating(models.Model):

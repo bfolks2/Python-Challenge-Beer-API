@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% if invalid %}
+    <h1 class='bg-warning'>Login Credentials were not correct.  Try Again</h1>
+  {% endif %}
+  <h2>Login Below</h2>
+  <form method="post">
+    {% csrf_token %}
+    <label for="username">UserName</label>
+    <input type="text" name="username" placeholder="Input Username Here">
+    <label for="password">Password</label>
+    <input type="password" name="password">
+    <input type="submit" name="" value="Login">
+  </form>
+{% endblock %}
