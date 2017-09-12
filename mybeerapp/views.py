@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from mybeerapp.models import Beer
+from mybeerapp.models import Beer, Rating
 from django.views import generic
 from mybeerapp.forms import BeerForm, RatingForm
 from django.contrib.auth.decorators import login_required
@@ -49,17 +49,24 @@ def createbeer(request):
 
 @login_required
 def createrating(request):
+
+    beerflag=False
+
     if request.method=='POST':
         ratingform=RatingForm(request.POST)
         if ratingform.is_valid():
             rating=ratingform.save(commit=False)
+            ratingbeer=rating.beer
+            if Rating.objects.filter(user=request.user, beer=rating.beer).exists():
+                beerflag=True
+                return render (request,'mybeerapp/createrating.html',{'ratingform':ratingform,'beerflag':beerflag, 'ratingbeer':ratingbeer})
             rating.user=request.user
             rating.save()
             return HttpResponseRedirect(reverse('index'))
     else:
         ratingform=RatingForm()
 
-    return render(request, 'mybeerapp/createrating.html',{'ratingform':ratingform})
+    return render (request,'mybeerapp/createrating.html',{'ratingform':ratingform,'beerflag':beerflag})
 
 
 def user_beerlist(request,username):

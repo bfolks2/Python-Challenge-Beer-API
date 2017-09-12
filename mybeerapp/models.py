@@ -81,4 +81,4 @@ class Rating(models.Model):
     average = property(_get_average)
 
     def __str__(self):
-        return str(self.average)
+        return self.beer.name + ': ' + str(self.average) + '%'

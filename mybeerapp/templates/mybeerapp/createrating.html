@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
   <div class="beer_css">
+    {% if beerflag and ratingbeer %}
+      <h1 class='bg-warning'>Error: @{{user.username}} cannot review {{ratingbeer.name}} twice.</h1>
+    {% endif %}
     <h1>CREATE RATING</h1>
     <form method="post">
       {% csrf_token %}
