@@ -3,14 +3,14 @@
   <div class="beer_css">
     <h1><u>{{beer.name}}</u></h1>
     <ul>
-      <li>Created by: @{{beer.user}}</li>
+      <li>Created by: <a href="{% url 'mybeerapp:user_beerlist' username=beer.user.username %}">@{{beer.user}}</a></li>
       <li>Calories: {{beer.calories}}</li>
       <li>ABV: {{beer.abv}}%</li>
       <li>Style: {{beer.style}}</li>
       <li>Glass: {{beer.glass}}</li>
       <li>Brewery Location: {{beer.location}}</li>
       {% if beer.ratings.count %}
-        <li>Average Rating: {{beer.total_average}}%</li>
+        <li>Overall User Rating: <a href="{% url 'mybeerapp:rating_details' slug=beer.slug %}">{{beer.total_average}}%</a></li>
       {% endif %}
     </ul>
   </div>

@@ -4,6 +4,7 @@ from django.views import generic
 from mybeerapp.forms import BeerForm, RatingForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -58,7 +59,7 @@ def createrating(request):
 @login_required
 def user_beerlist(request,username):
     try:
-        beer_user = request.user
+        beer_user = get_object_or_404(User, username=username)
     except User.DoesNotExist:
         raise Http404
     else:

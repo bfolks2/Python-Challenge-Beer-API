@@ -7,7 +7,7 @@
         <div class="col-md-4 col-xs-6">
           <li>
             <ul>
-              <li>User: @{{rating.user}}</li>
+              <li>User: <a href="{% url 'mybeerapp:user_beerlist' username=rating.user.username %}">@{{rating.user}}</a></li>
               <li>Aroma: {{rating.aroma}}/5</li>
               <li>Appearance: {{rating.appearance}}/5</li>
               <li>Taste: {{rating.taste}}/10</li>

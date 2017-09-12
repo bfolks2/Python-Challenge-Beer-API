@@ -8,7 +8,7 @@
       <h2><u>Beer List</u></h2>
       <ol>
         {% for beer in user_beers %}
-          <h3><li>{{beer.name}}</li></h3>
+          <h3><li><a href="{% url 'mybeerapp:beer_details' slug=beer.slug %}">{{beer.name}}</a></li></h3>
           <ul>
             <li>Calories: {{beer.calories}}</li>
             <li>ABV: {{beer.abv}}%</li>
@@ -16,10 +16,7 @@
             <li>Glass: {{beer.glass}}</li>
             <li>Brewery Address: {{beer.location}}</li>
             {% if beer.ratings.count %}
-              <li>Average Rating: {{beer.total_average}}%</li>
-              {% for rating in beer.ratings.all %}
-                {{rating.user}}
-              {% endfor %}
+              <li>Overall User Rating: <a href="{% url 'mybeerapp:rating_details' slug=beer.slug %}">{{beer.total_average}}%</a></li>
             {% endif %}
           </ul>
         {% endfor %}
@@ -31,7 +28,7 @@
       <h2><u>Rating List</u></h2>
       <ol>
         {% for rating in user_ratings %}
-          <h3><li>{{rating.beer.name}}</li></h3>
+          <h3><li><a href="{% url 'mybeerapp:beer_details' slug=rating.beer.slug %}">{{rating.beer.name}}</a></li></h3>
           <ul>
             <li>Aroma: {{rating.aroma}}/5</li>
             <li>Appearance: {{rating.appearance}}/5</li>
