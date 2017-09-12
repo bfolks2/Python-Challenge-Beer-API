@@ -16,7 +16,7 @@ class Glass(models.Model):
 
 
 class Beer(models.Model):
-    user=models.ForeignKey(User, related_name='beers', default=User)
+    user=models.ForeignKey(User, related_name='beers', default=1)
     name=models.CharField(max_length=256)
     slug=models.SlugField(unique=True, allow_unicode=True, default='')
     calories=models.PositiveIntegerField()

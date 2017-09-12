@@ -23,6 +23,9 @@
               <li>Style: {{beer.style}}</li>
               <li>Glass: {{beer.glass}}</li>
               <li>Brewery Address: {{beer.location}}</li>
+              {% for rating in beer.ratings.all %}
+                <li>Rating: {{rating.average}}/100</li>
+              {% endfor %}
             </ul>
           </div>
         {% endfor %}
