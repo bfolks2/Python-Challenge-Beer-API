@@ -14,4 +14,4 @@ class BeerForm(forms.ModelForm):
 class RatingForm(forms.ModelForm):
     class Meta():
         model=Rating
-        fields='__all__'
+        exclude=['user']

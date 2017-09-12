@@ -69,15 +69,14 @@ class Rating(models.Model):
         (10,'10/10'),
     )
 
+    user=models.ForeignKey(User, related_name='user_ratings', default=1)
     aroma=models.PositiveIntegerField(choices=five_choices)
     appearance=models.PositiveIntegerField(choices=five_choices)
     taste=models.PositiveIntegerField(choices=ten_choices) #taste is weighted
-    palate=models.PositiveIntegerField(choices=five_choices)
-    bottle_style=models.PositiveIntegerField(choices=five_choices)
     beer=models.ForeignKey(Beer, related_name='ratings')
 
     def _get_average(self):
-        return round(((self.aroma + self.appearance + self.taste + self.palate + self.bottle_style)/30)*100)
+        return round(((self.aroma + self.appearance + self.taste)/20)*100)
     average = property(_get_average)
 
     def __str__(self):

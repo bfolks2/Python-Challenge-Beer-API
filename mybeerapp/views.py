@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from mybeerapp.models import Beer
 from django.views import generic
 from mybeerapp.forms import BeerForm, RatingForm
@@ -46,6 +46,7 @@ def createrating(request):
         ratingform=RatingForm(request.POST)
         if ratingform.is_valid():
             rating=ratingform.save(commit=False)
+            rating.user=request.user
             rating.save()
             return HttpResponseRedirect(reverse('index'))
     else:
@@ -62,11 +63,18 @@ def user_beerlist(request,username):
         raise Http404
     else:
         user_beers = beer_user.beers.all()
+        user_ratings = beer_user.user_ratings.all()
 
-    print(beer_user.username)
-    print(user_beers)
+    return render(request, 'mybeerapp/user_beerlist.html', {'beer_user':beer_user, 'user_beers':user_beers, 'user_ratings':user_ratings})
 
-    return render(request, 'mybeerapp/user_beerlist.html', {'beer_user':beer_user, 'user_beers':user_beers})
+def beer_details(request, slug):
+    beer = get_object_or_404(Beer, slug=slug)
+    return render(request, 'mybeerapp/beerdetails.html',{'beer':beer})
+
+def rating_details(request, slug):
+    beer = get_object_or_404(Beer, slug=slug)
+    return render(request, 'mybeerapp/ratingdetails.html',{'beer':beer})
+
 
 # def beerdetails(request):
 #     return render(request, 'mybeerapp/beer_details.html')

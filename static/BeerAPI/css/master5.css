@@ -11,3 +11,7 @@ body{
 .navbar-collapse .navbar-nav li a{
   color: black;
 }
+
+.beer_css{
+  padding-top: 40px;
+}
