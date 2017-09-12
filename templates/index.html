@@ -19,13 +19,13 @@
             <ul>
               <li>Created by: @{{beer.user}}</li>
               <li>Calories: {{beer.calories}}</li>
-              <li>ABV: {{beer.abv}}</li>
+              <li>ABV: {{beer.abv}}%</li>
               <li>Style: {{beer.style}}</li>
               <li>Glass: {{beer.glass}}</li>
               <li>Brewery Address: {{beer.location}}</li>
-              {% for rating in beer.ratings.all %}
-                <li>Rating: {{rating.average}}/100</li>
-              {% endfor %}
+              {% if beer.ratings.count %}
+                <li>Average Rating: {{beer.total_average}}%</li>
+              {% endif %}
             </ul>
           </div>
         {% endfor %}

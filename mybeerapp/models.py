@@ -32,6 +32,16 @@ class Beer(models.Model):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+    def _get_total_average(self):
+        count=self.ratings.count()
+        total=0
+        for rating in self.ratings.all():
+            total=total+rating.average
+        if count==0:
+            count=1
+        return (total/count)
+    total_average = property(_get_total_average)
+
     # def get_absolute_url(self):
     #     return reverse('mybeerapp:details', kwargs={'slug':self.slug,'username':self.user.username,'pk':self.pk})
 
