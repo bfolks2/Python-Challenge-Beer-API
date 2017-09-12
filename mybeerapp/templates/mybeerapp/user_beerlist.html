@@ -5,7 +5,7 @@
     <h1><em>@{{beer_user}}</em></h1>
 
     <div class="col-xs-6">
-      <h2><u>Beer List</u></h2>
+      <h2><u>Created Beer List</u></h2>
       <ol>
         {% for beer in user_beers %}
           <h3><li><a href="{% url 'mybeerapp:beer_details' slug=beer.slug %}">{{beer.name}}</a></li></h3>

@@ -23,6 +23,7 @@ class Beer(models.Model):
     abv=models.DecimalField(max_digits=3, decimal_places=1)
     style=models.CharField(default="It's a beer", max_length=256)
     location=models.CharField(max_length=256)
+    created_at = models.DateTimeField(auto_now=True)
     glass=models.ManyToManyField(Glass)
 
     def __str__(self):
@@ -70,10 +71,10 @@ class Rating(models.Model):
     )
 
     user=models.ForeignKey(User, related_name='user_ratings', default=1)
+    beer=models.ForeignKey(Beer, related_name='ratings')
     aroma=models.PositiveIntegerField(choices=five_choices)
     appearance=models.PositiveIntegerField(choices=five_choices)
     taste=models.PositiveIntegerField(choices=ten_choices) #taste is weighted
-    beer=models.ForeignKey(Beer, related_name='ratings')
 
     def _get_average(self):
         return round(((self.aroma + self.appearance + self.taste)/20)*100)

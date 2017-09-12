@@ -4,6 +4,7 @@
     <h1><u>{{beer.name}}</u></h1>
     <ul>
       <li>Created by: <a href="{% url 'mybeerapp:user_beerlist' username=beer.user.username %}">@{{beer.user}}</a></li>
+      <li>Created on:  {{beer.created_at}}</li>
       <li>Calories: {{beer.calories}}</li>
       <li>ABV: {{beer.abv}}%</li>
       <li>Style: {{beer.style}}</li>

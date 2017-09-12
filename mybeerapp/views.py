@@ -10,6 +10,7 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 
 from django.http import HttpResponseRedirect
+from django.utils import timezone
 
 # Create your views here.
 
@@ -26,19 +27,24 @@ class BeerList(generic.ListView):
 @login_required
 def createbeer(request):
 
+    yesterday = timezone.now() - timezone.timedelta(days=1)
+    dayflag=False
+
+    beerform=BeerForm()
+
+    if Beer.objects.filter(user=request.user, created_at__gt=yesterday).exists():
+        dayflag=True
+        return render (request,'mybeerapp/createbeer.html',{'beerform':beerform,'dayflag':dayflag})
+
     if request.method=='POST':
         beerform=BeerForm(request.POST)
         if beerform.is_valid():
             beer=beerform.save(commit=False)
             beer.user=request.user
             beer.save()
-            # return HttpResponseRedirect(reverse('mybeerapp:beer_details', kwargs={'username':self.user.username, 'pk':self.pk}))
-            # return HttpResponseRedirect(reverse('mybeerapp:beer_list', kwargs={'username':self.user.username}))
-            return HttpResponseRedirect(reverse('index'))
-    else:
-        beerform=BeerForm()
+            return render(request, 'mybeerapp/beerdetails.html',{'beer':beer})
 
-    return render (request,'mybeerapp/createbeer.html',{'beerform':beerform})
+    return render (request,'mybeerapp/createbeer.html',{'beerform':beerform,'dayflag':dayflag})
 
 
 @login_required
@@ -56,7 +62,6 @@ def createrating(request):
     return render(request, 'mybeerapp/createrating.html',{'ratingform':ratingform})
 
 
-@login_required
 def user_beerlist(request,username):
     try:
         beer_user = get_object_or_404(User, username=username)
