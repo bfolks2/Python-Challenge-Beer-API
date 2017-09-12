@@ -1,16 +1,32 @@
 {% extends 'base.html' %}
-{% block content %}
+{% block unbound %}
   <div class="jumbotron">
-    <h1>Home Page</h1>
-    <h3>This website is purely functional.  Unlike its creator, it will not win any beauty contests :)</h3>
-    <h3>Users can register profiles, log in/out, and create/rate items.  Once logged in, each user can track
-    the items created by him/herself by clicking on the "@username" link in the upper right of the screeen.
-    To prevent alcoholism, only 1 item can be created per user, per day</h3>
+    <div class="container">
+      <h1>Home Page</h1>
+      <h3>This website is purely functional.  Unlike its creator, it will not win any beauty contests :)</h3>
+      <h3>Users can register profiles, log in/out, and create/rate items.  Once logged in, each user can track
+      the items created by him/herself by clicking on the "@username" link in the upper right of the screeen.
+      To prevent alcoholism, only 1 item can be created per user, per day</h3>
+    </div>
   </div>
-  <div class="jumbotron">
-    <h2>Every Beer Ever logged on this site is listed below:</h2>
-      {% for beer in beers %}
-        <p>{{beer.name}}</p>
-      {% endfor %}
+  <div class="middlesection">
+    <div class="container">
+      <h2>Below is a list of ALL beers ever created on this site:</h2>
+      <ol>
+        {% for beer in beers %}
+          <div class="col-md-4 col-xs-6">
+            <h3><li>{{beer.name}}</li></h3>
+            <ul>
+              <li>Created by: @{{beer.user}}</li>
+              <li>Calories: {{beer.calories}}</li>
+              <li>ABV: {{beer.abv}}</li>
+              <li>Style: {{beer.style}}</li>
+              <li>Glass: {{beer.glass}}</li>
+              <li>Brewery Address: {{beer.location}}</li>
+            </ul>
+          </div>
+        {% endfor %}
+      </ol>
+    </div>
   </div>
 {% endblock %}

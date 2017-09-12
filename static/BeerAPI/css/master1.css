@@ -1,0 +1,13 @@
+body{
+  background-color: #f9f9f9;
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+
+.navbar-inverse{
+  background-color: #9bc9b1;
+}
+
+.navbar-collapse .navbar-nav li a{
+  color: black;
+}

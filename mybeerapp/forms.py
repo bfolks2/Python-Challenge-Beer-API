@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from mybeerapp.models import Beer
+from mybeerapp.models import Beer, Rating
 
 class BeerForm(forms.ModelForm):
     name=forms.CharField(label="Beer Name")
@@ -10,3 +10,8 @@ class BeerForm(forms.ModelForm):
     class Meta():
         model=Beer
         exclude=['user','slug']
+
+class RatingForm(forms.ModelForm):
+    class Meta():
+        model=Rating
+        fields='__all__'

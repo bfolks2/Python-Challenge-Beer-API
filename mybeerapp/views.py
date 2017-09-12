@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from mybeerapp.models import Beer
 from django.views import generic
-from mybeerapp.forms import BeerForm
+from mybeerapp.forms import BeerForm, RatingForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 
@@ -38,6 +38,21 @@ def createbeer(request):
         beerform=BeerForm()
 
     return render (request,'mybeerapp/createbeer.html',{'beerform':beerform})
+
+
+@login_required
+def createrating(request):
+    if request.method=='POST':
+        ratingform=RatingForm(request.POST)
+        if ratingform.is_valid():
+            rating=ratingform.save(commit=False)
+            rating.save()
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        ratingform=RatingForm()
+
+    return render(request, 'mybeerapp/createrating.html',{'ratingform':ratingform})
+
 
 @login_required
 def user_beerlist(request,username):

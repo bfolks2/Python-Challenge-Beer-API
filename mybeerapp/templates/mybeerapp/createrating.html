@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>CREATE RATING</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ ratingform.as_p }}
+    <input type="submit" name="" value="Rate">
+  </form>
+{% endblock %}
