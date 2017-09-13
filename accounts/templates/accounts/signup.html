@@ -12,7 +12,7 @@
         <h1 class='bg-warning'>Sign Up Credentials were not correct.  Try Again</h1>
       {% endif %}
       <div class="jumbotron">
-        <h2>Please Register Below:</h2>
+        <h2><u>Please Register Below:</u></h2>
         <form method="post">
           {% csrf_token %}
           {{usercreateform.as_p}}

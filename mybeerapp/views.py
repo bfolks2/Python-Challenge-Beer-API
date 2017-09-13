@@ -5,6 +5,7 @@ from mybeerapp.forms import BeerForm, RatingForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -29,6 +30,7 @@ def createbeer(request):
 
     yesterday = timezone.now() - timezone.timedelta(days=1)
     dayflag=False
+    nameflag=False
 
     beerform=BeerForm()
 
@@ -40,6 +42,10 @@ def createbeer(request):
         beerform=BeerForm(request.POST)
         if beerform.is_valid():
             beer=beerform.save(commit=False)
+            for beerobj in Beer.objects.all():
+                if beerobj.slug_name == slugify(beer.name):
+                    nameflag=True
+                    return render (request,'mybeerapp/createbeer.html',{'beerform':beerform,'nameflag':nameflag,'beer':beer})
             beer.user=request.user
             beer.save()
             return render(request, 'mybeerapp/beerdetails.html',{'beer':beer})
@@ -56,13 +62,12 @@ def createrating(request):
         ratingform=RatingForm(request.POST)
         if ratingform.is_valid():
             rating=ratingform.save(commit=False)
-            ratingbeer=rating.beer
             if Rating.objects.filter(user=request.user, beer=rating.beer).exists():
                 beerflag=True
-                return render (request,'mybeerapp/createrating.html',{'ratingform':ratingform,'beerflag':beerflag, 'ratingbeer':ratingbeer})
+                return render (request,'mybeerapp/createrating.html',{'ratingform':ratingform,'beerflag':beerflag, 'ratingbeer':rating.beer})
             rating.user=request.user
             rating.save()
-            return HttpResponseRedirect(reverse('index'))
+            return render(request, 'mybeerapp/ratingdetails.html',{'beer':rating.beer})
     else:
         ratingform=RatingForm()
 

@@ -18,7 +18,7 @@ class Glass(models.Model):
 class Beer(models.Model):
     user=models.ForeignKey(User, related_name='beers', default=1)
     name=models.CharField(max_length=256)
-    slug=models.SlugField(unique=True, allow_unicode=True, default='')
+    slug=models.SlugField(allow_unicode=True, default='')
     calories=models.PositiveIntegerField()
     abv=models.DecimalField(max_digits=3, decimal_places=1)
     style=models.CharField(default="It's a beer", max_length=256)
@@ -42,6 +42,11 @@ class Beer(models.Model):
             count=1
         return (total/count)
     total_average = property(_get_total_average)
+
+    def _get_slug_name(self):
+        return slugify(self.name)
+    slug_name = property(_get_slug_name)
+
 
     # def get_absolute_url(self):
     #     return reverse('mybeerapp:details', kwargs={'slug':self.slug,'username':self.user.username,'pk':self.pk})

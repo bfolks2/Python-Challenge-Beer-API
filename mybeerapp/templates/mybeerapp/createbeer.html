@@ -4,7 +4,10 @@
     {% if dayflag %}
       <h1 class='bg-warning'>Error: @{{user.username}} can only create one beer per day.</h1>
     {% endif %}
-    <h1>CREATE BEER</h1>
+    {% if nameflag %}
+      <h1 class='bg-warning'>Error: A version of <em>{{beer.name}}</em> already exists.</h1>
+    {% endif %}
+    <h1><u>Create Beer:</u></h1>
     <form method="post">
       {% csrf_token %}
       {{ beerform.as_p }}
