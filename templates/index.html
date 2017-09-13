@@ -3,16 +3,16 @@
   <div class="jumbotron">
     <div class="container">
       <h1>Home Page</h1>
-      <h3>This website is purely functional.  Unlike its creator, it will not win any beauty contests :)
-      But what it lacks in prettiness, it makes up for a Django-ness.</h3>
+      <h3>This website is purely functional.  Unlike its creator, it will not win any beauty contests :) </h3>
+      <h3>But what it lacks in prettiness, it makes up for a Django-ness.</h3>
       <h3>Visitors to the site can register profiles to become Users.  Once registered, users can log in/out, and create/rate items.
       Guests can also look through reviews, although they cannot create/rate anything.  Once logged in, mutliple new functions for
       creating and rating items will be made available.  To prevent alcoholism, only 1 item can be created per user, per day.
-      Additionally, users can only review each beer once.  Each user can review the items created by him/herself by clicking
-      on the "@username" link in the upper right corner of the screeen (this link becomes active once a user has registered and
-      logged in successfully).</h3>
+      Additionally, users can only review each beer once.  Duplicate beer names are not allowed.
+      Each user can reference the items created by him/herself by clicking on the "@username" link in the upper right corner of the
+      screen (this link becomes active once a user has registered and logged in successfully).</h3>
 
-      <h3>The links on the Beer list are all functional, and can be used to access details for the corresponding fields.
+      <h3>The links on the Beer list below are all functional, and can be used to access details for the corresponding fields.
       Each beer listing contains a user link, displaying all beers/ratings created by that user.
       If a beer has been rated by any user, that beer listing entry also has an average score link which will show
       the details of each individual score.</h3>
@@ -37,6 +37,12 @@
           </div>
         {% endfor %}
       </ol>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="source_button">
+      <a href="https://github.com/bfolks2/Python-Challenge-Beer-API"><button class="btn btn-default" type="button">Website Source Code</button></a>
     </div>
   </div>
 {% endblock %}

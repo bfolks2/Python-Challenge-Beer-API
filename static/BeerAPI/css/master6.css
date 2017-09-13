@@ -1,0 +1,32 @@
+body{
+  background-color: #f9f9f9;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.navbar-inverse{
+  background-color: #9bc9b1;
+}
+
+.navbar-collapse .navbar-nav li a{
+  color: black;
+}
+
+.beer_css{
+  padding-top: 40px;
+}
+
+.source_button{
+  padding-top: 100px;
+  text-align: center;
+}
+
+.btn-default{
+  background-color: #4b8c6e;
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  width: 300px;
+  height: 50px;
+  border-radius: 5%;
+}

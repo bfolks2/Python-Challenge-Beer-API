@@ -24,7 +24,7 @@ class Beer(models.Model):
     style=models.CharField(default="It's a beer", max_length=256)
     location=models.CharField(max_length=256)
     created_at = models.DateTimeField(auto_now=True)
-    glass=models.ManyToManyField(Glass)
+    glass=models.ForeignKey(Glass, related_name='beers', default=1)
 
     def __str__(self):
         return self.name

@@ -8,7 +8,7 @@
       <li>Calories: {{beer.calories}}</li>
       <li>ABV: {{beer.abv}}%</li>
       <li>Style: {{beer.style}}</li>
-      <li>Glass: {{beer.glass}}</li>
+      <li>Glass: {{beer.glass.name}}</li>
       <li>Brewery Location: {{beer.location}}</li>
       {% if beer.ratings.count %}
         <li>Overall User Rating: <a href="{% url 'mybeerapp:rating_details' slug=beer.slug %}">{{beer.total_average}}%</a></li>
