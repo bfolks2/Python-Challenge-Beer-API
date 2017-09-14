@@ -9,7 +9,7 @@ class BeerForm(forms.ModelForm):
 
     class Meta():
         model=Beer
-        exclude=['user','slug']
+        exclude=['user','slug','created_at']
 
 class RatingForm(forms.ModelForm):
     class Meta():

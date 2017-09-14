@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="beer_css">
+    <h3>Are you sure you want to delete <em>{{beerdelete.name}}</em> from the list of Beers?</h3>
+    <form method="post">
+      {% csrf_token %}
+      <input class="btn btn-danger" type="submit" name="" value="Delete">
+      <a class="btn btn-warning" href="{% url 'mybeerapp:user_beerlist' username=beerdelete.user.username %}">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

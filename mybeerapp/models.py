@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 from django.utils.text import slugify #remove any characters that are not alphanuermica, /'s, or -'s
 from accounts.models import User
 
@@ -23,7 +24,7 @@ class Beer(models.Model):
     abv=models.DecimalField(max_digits=3, decimal_places=1)
     style=models.CharField(default="It's a beer", max_length=256)
     location=models.CharField(max_length=256)
-    created_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(default=timezone.now)
     glass=models.ForeignKey(Glass, related_name='beers', default=1)
 
     def __str__(self):
@@ -46,6 +47,9 @@ class Beer(models.Model):
     def _get_slug_name(self):
         return slugify(self.name)
     slug_name = property(_get_slug_name)
+
+    def get_absolute_url(self):
+        return reverse("mybeerapp:user_beerlist",kwargs={'username':self.user.username})
 
 
     # def get_absolute_url(self):
@@ -87,3 +91,6 @@ class Rating(models.Model):
 
     def __str__(self):
         return self.beer.name + ': ' + str(self.average) + '%'
+
+    def get_absolute_url(self):
+        return reverse("mybeerapp:user_beerlist",kwargs={'username':self.user.username})

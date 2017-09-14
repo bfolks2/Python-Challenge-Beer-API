@@ -2,10 +2,30 @@ body{
   background-color: #f9f9f9;
   padding-top: 30px;
   padding-bottom: 30px;
+  font-family: 'Open Sans',sans-serif;
+}
+
+.barname{
+  font-weight: bold;
+  font-size: 1.25em;
+}
+
+.introsection .container h3{
+  font-size: 1.25em;
+}
+
+.introsection{
+  padding-top: 25px;
+  padding-bottom: 15px;
+  background-color: #eaefec;
 }
 
 .navbar-inverse{
   background-color: #9bc9b1;
+}
+
+.navbar-right li input {
+  margin-top: 13px;
 }
 
 .navbar-collapse .navbar-nav li a{
@@ -19,6 +39,14 @@ body{
 .source_button{
   padding-top: 100px;
   text-align: center;
+}
+
+.glyphs{
+  margin-top: 20px;
+}
+
+.glyphdel{
+  background-color: #d85050;
 }
 
 .btn-default{

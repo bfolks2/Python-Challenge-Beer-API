@@ -10,8 +10,12 @@
     <h1><u>Create Beer:</u></h1>
     <form method="post">
       {% csrf_token %}
-      {{ beerform.as_p }}
-      <input type="submit" name="" value="Create">
+      {{ form.as_p }}
+      {% if update %}
+        <input type="submit" name="" value="Update">
+      {% else %}
+        <input type="submit" name="" value="Create">
+      {% endif %}
     </form>
   </div>
 {% endblock %}

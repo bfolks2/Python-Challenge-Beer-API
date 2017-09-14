@@ -19,6 +19,12 @@
               <li>Overall User Rating: <a href="{% url 'mybeerapp:rating_details' slug=beer.slug %}">{{beer.total_average}}%</a></li>
             {% endif %}
           </ul>
+
+          {% if user.is_authenticated and user == beer_user %}
+              <a class="btn btn-primary glyphs" href="{% url 'mybeerapp:beer_edit' slug=beer.slug %}"><span class="glyphicon glyphicon-pencil"></span></a>
+              <a class="btn btn-primary glyphs glyphdel" href="{% url 'mybeerapp:beer_delete' slug=beer.slug %}"><span class="glyphicon glyphicon-remove"></span></a>
+          {% endif %}
+
         {% endfor %}
       </ol>
     </div>
@@ -35,6 +41,12 @@
             <li>Taste: {{rating.taste}}/10</li>
             <li>Total: {{rating.average}}%</li>
           </ul>
+
+          {% if user.is_authenticated and user == beer_user %}
+              <a class="btn btn-primary glyphs" href="{% url 'mybeerapp:rating_edit' pk=rating.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+              <a class="btn btn-primary glyphs glyphdel" href="{% url 'mybeerapp:rating_delete' pk=rating.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+          {% endif %}
+
         {% endfor %}
       </ol>
     </div>

@@ -1,16 +1,20 @@
 {% extends 'base.html' %}
 {% block unbound %}
-  <div class="jumbotron">
+  <div class="introsection">
     <div class="container">
+      {% if notuser %}
+        <h4 class='bg-warning'>Error: @{{username}} does not exist.</h4>
+      {% endif %}
       <h1>Home Page</h1>
       <h3>This website is purely functional.  Unlike its creator, it will not win any beauty contests :) </h3>
       <h3>But what it lacks in prettiness, it makes up for a Django-ness.</h3>
       <h3>Visitors to the site can register profiles to become Users.  Once registered, users can log in/out, and create/rate items.
       Guests can also look through reviews, although they cannot create/rate anything.  Once logged in, mutliple new functions for
       creating and rating items will be made available.  To prevent alcoholism, only 1 item can be created per user, per day.
-      Additionally, users can only review each beer once.  Duplicate beer names are not allowed.
+      Additionally, users can only review each beer once.  Beer names are case insensitive, and duplicates are not allowed.
       Each user can reference the items created by him/herself by clicking on the "@username" link in the upper right corner of the
-      screen (this link becomes active once a user has registered and logged in successfully).</h3>
+      screen (this link becomes active once a user has registered and logged in successfully).  From there, items for that user can base be
+      edited or deleted.  You can also search for users on the site by using the "Search username" function on the navbar.</h3>
 
       <h3>The links on the Beer list below are all functional, and can be used to access details for the corresponding fields.
       Each beer listing contains a user link, displaying all beers/ratings created by that user.
@@ -22,20 +26,22 @@
     <div class="container">
       <h2>Below is a list of ALL beers ever created on this site:</h2>
       <ol>
-        {% for beer in beers %}
-          <div class="col-md-4 col-xs-6">
-            <h3><li><a href="{% url 'mybeerapp:beer_details' slug=beer.slug %}">{{beer.name}}</a></li></h3>
-            <ul>
-              <li>Created by: <a href="{% url 'mybeerapp:user_beerlist' username=beer.user.username %}">@{{beer.user}}</a></li>
-              <li>Calories: {{beer.calories}}</li>
-              <li>ABV: {{beer.abv}}%</li>
-              <li>Style: {{beer.style}}</li>
-              {% if beer.ratings.count %}
-                <li>Overall User Rating: <a href="{% url 'mybeerapp:rating_details' slug=beer.slug %}">{{beer.total_average}}%</a></li>
-              {% endif %}
-            </ul>
-          </div>
-        {% endfor %}
+        <div class="table">
+          {% for beer in beers %}
+            <div class="col-md-4 col-xs-6">
+              <h3><li><a href="{% url 'mybeerapp:beer_details' slug=beer.slug %}">{{beer.name}}</a></li></h3>
+              <ul>
+                <li>Created by: <a href="{% url 'mybeerapp:user_beerlist' username=beer.user.username %}">@{{beer.user}}</a></li>
+                <li>Calories: {{beer.calories}}</li>
+                <li>ABV: {{beer.abv}}%</li>
+                <li>Style: {{beer.style}}</li>
+                {% if beer.ratings.count %}
+                  <li>Overall User Rating: <a href="{% url 'mybeerapp:rating_details' slug=beer.slug %}">{{beer.total_average}}%</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          {% endfor %}
+        </div>
       </ol>
     </div>
   </div>
