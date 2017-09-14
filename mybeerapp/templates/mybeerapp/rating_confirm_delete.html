@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
   <div class="beer_css">
-    <h3>Are you sure you want to delete <em>{{beerdelete.name}}</em> from the list of Beers?</h3>
+    <h3>Are you sure you want to delete your Rating for <em>{{ratingdelete.beer.name}}</em>?</h3>
     <form method="post">
       {% csrf_token %}
       <input class="btn btn-danger" type="submit" name="" value="Delete">
