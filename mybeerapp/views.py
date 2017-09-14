@@ -62,7 +62,7 @@ class BeerUpdateView(LoginRequiredMixin,UpdateView):
     template_name = 'mybeerapp/createbeer.html'
 
     model = Beer
-    fields=['name','calories','abv','style','location','glass']
+    fields=['calories','abv','style','location','glass']
 
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
@@ -93,7 +93,7 @@ def createrating(request):
                 return render (request,'mybeerapp/createrating.html',{'form':ratingform,'beerflag':beerflag, 'ratingbeer':rating.beer})
             rating.user=request.user
             rating.save()
-            return render(request, 'mybeerapp/ratingdetails.html',{'beer':rating.beer})
+            return render(request, 'mybeerapp/ratingdetails.html',{'ratingbeer':rating.beer})
     else:
         ratingform=RatingForm()
 
@@ -107,7 +107,8 @@ class RatingUpdateView(LoginRequiredMixin,UpdateView):
     template_name = 'mybeerapp/createrating.html'
 
     model = Rating
-    fields=['beer','aroma','appearance','taste']
+    fields=['aroma','appearance','taste']
+    context_object_name='ratingupdate'
 
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)

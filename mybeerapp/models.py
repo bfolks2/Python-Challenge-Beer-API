@@ -41,7 +41,7 @@ class Beer(models.Model):
             total=total+rating.average
         if count==0:
             count=1
-        return (total/count)
+        return round((total/count),2)
     total_average = property(_get_total_average)
 
     def _get_slug_name(self):

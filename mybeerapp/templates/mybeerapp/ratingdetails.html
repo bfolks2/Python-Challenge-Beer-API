@@ -4,7 +4,7 @@
     <h1><u>Overall <em>{{beer.name}}</em> Rating Details:</u></h1>
     <ol>
       {% for rating in beer.ratings.all %}
-        <div class="col-md-4 col-xs-6">
+        <div class="col-md-4 col-xs-6 ratingdet">
           <li>
             <ul>
               <li>User: <a href="{% url 'mybeerapp:user_beerlist' username=rating.user.username %}">@{{rating.user}}</a></li>

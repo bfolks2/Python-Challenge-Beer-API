@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
   <div class="beer_css">
+
     {% if dayflag %}
       <h1 class='bg-warning'>Error: @{{user.username}} can only create one beer per day.</h1>
     {% endif %}
+
     {% if nameflag %}
       <h1 class='bg-warning'>Error: A version of <em>{{beer.name}}</em> already exists.</h1>
     {% endif %}
-    <h1><u>Create Beer:</u></h1>
+
+    {% if update %}
+      <h1><u>Update <em>{{beer.name}}</em>:</u></h1>
+    {% else %}
+      <h1><u>Create Beer:</u></h1>
+    {% endif %}
+
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
@@ -17,5 +25,6 @@
         <input type="submit" name="" value="Create">
       {% endif %}
     </form>
+
   </div>
 {% endblock %}

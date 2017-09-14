@@ -4,7 +4,13 @@
     {% if beerflag and ratingbeer %}
       <h1 class='bg-warning'>Error: @{{user.username}} cannot review <em>{{ratingbeer.name}}</em> more than once.</h1>
     {% endif %}
-    <h1>CREATE RATING</h1>
+
+    {% if rateupdate %}
+      <h1><u>Update <em>{{ratingupdate.beer.name}}</em> Rating:</u></h1>
+    {% else %}
+      <h1><u>Create Rating:</u></h1>
+    {% endif %}
+
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
@@ -14,5 +20,6 @@
         <input type="submit" name="" value="Rate">
       {% endif %}
     </form>
+
   </div>
 {% endblock %}
