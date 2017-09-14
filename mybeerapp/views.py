@@ -93,7 +93,7 @@ def createrating(request):
                 return render (request,'mybeerapp/createrating.html',{'form':ratingform,'beerflag':beerflag, 'ratingbeer':rating.beer})
             rating.user=request.user
             rating.save()
-            return render(request, 'mybeerapp/ratingdetails.html',{'ratingbeer':rating.beer})
+            return render(request, 'mybeerapp/ratingdetails.html',{'beer':rating.beer})
     else:
         ratingform=RatingForm()
 
@@ -145,7 +145,8 @@ def user_search(request):
             return HttpResponseRedirect(reverse('mybeerapp:user_beerlist', kwargs={'username':username}))
         else:
             notuser=True
-            return render (request,'index.html', {'username':username,'notuser':notuser})
+            beers=Beer.objects.all().order_by('name')
+            return render (request,'index.html', {'beers':beers,'username':username,'notuser':notuser})
 
 def beer_details(request, slug):
     beer = get_object_or_404(Beer, slug=slug)
