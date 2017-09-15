@@ -21,7 +21,13 @@ class Beer(models.Model):
     name=models.CharField(max_length=256)
     slug=models.SlugField(allow_unicode=True, default='')
     calories=models.PositiveIntegerField()
-    abv=models.DecimalField(max_digits=3, decimal_places=1)
+    abv=models.DecimalField(max_digits=3, decimal_places=1, error_messages=
+    {'max_whole_digits': 'Number must be from 0.0 - 99.9, one decimal place max',
+    'max_decimal_places': 'Number must be from 0.0 - 99.9, one decimal place max',
+    'max_digits': 'Number must be from 0.0 - 99.9, one decimal place max',
+    'max_value': 'Number must be from 0.0 - 99.9, one decimal place max',
+    'min_value': 'Number must be from 0.0 - 99.9, one decimal place max',
+    })
     style=models.CharField(default="It's a beer", max_length=256)
     location=models.CharField(max_length=256)
     created_at = models.DateTimeField(default=timezone.now)

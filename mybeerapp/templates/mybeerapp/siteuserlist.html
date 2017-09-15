@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="beer_css">
+
+    <h2 class='bg-warning'>Error: @{{username}} is not a registered user on this site.</h2>
+    <h2><u>Below is a List of All Registered Users:</u></h2>
+
+    <ul>
+      {% for user in users %}
+        <li><a href="{% url 'mybeerapp:user_beerlist' username=user.username %}">@{{user}}</a></li>
+      {% endfor %}
+    </ul>
+
+  </div>
+{% endblock %}

@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from django.db.models.functions import Lower
 
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -42,6 +43,7 @@ def createbeer(request):
 
     if request.method=='POST':
         beerform=BeerForm(request.POST)
+        print(beerform.errors)
         if beerform.is_valid():
             beer=beerform.save(commit=False)
             for beerobj in Beer.objects.all():
@@ -149,8 +151,8 @@ def user_search(request):
             return HttpResponseRedirect(reverse('mybeerapp:user_beerlist', kwargs={'username':username}))
         else:
             notuser=True
-            beers=Beer.objects.all().order_by('name')
-            return render (request,'index.html', {'beers':beers,'username':username,'notuser':notuser})
+            users=User.objects.all().order_by(Lower('username'))
+            return render (request,'mybeerapp/siteuserlist.html', {'users':users,'username':username})
 
 def beer_details(request, slug):
     beer = get_object_or_404(Beer, slug=slug)
