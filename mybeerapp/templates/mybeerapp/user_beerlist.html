@@ -34,18 +34,22 @@
       <h2><u>Rating List</u></h2>
       <ol>
         {% for rating in user_ratings %}
-          <h3><li><a href="{% url 'mybeerapp:beer_details' slug=rating.beer.slug %}">{{rating.beer.name}}</a></li></h3>
-          <ul>
-            <li>Aroma: {{rating.aroma}}/5</li>
-            <li>Appearance: {{rating.appearance}}/5</li>
-            <li>Taste: {{rating.taste}}/10</li>
-            <li>Total: {{rating.average}}%</li>
-          </ul>
+          <div class="col-xs-6">
 
-          {% if user.is_authenticated and user == beer_user %}
-              <a class="btn btn-primary glyphs" href="{% url 'mybeerapp:rating_edit' pk=rating.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-              <a class="btn btn-primary glyphs glyphdel" href="{% url 'mybeerapp:rating_delete' pk=rating.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-          {% endif %}
+            <h3><li><a href="{% url 'mybeerapp:beer_details' slug=rating.beer.slug %}">{{rating.beer.name}}</a></li></h3>
+            <ul>
+              <li>Aroma: {{rating.aroma}}/5</li>
+              <li>Appearance: {{rating.appearance}}/5</li>
+              <li>Taste: {{rating.taste}}/10</li>
+              <li>Total: {{rating.average}}%</li>
+            </ul>
+
+            {% if user.is_authenticated and user == beer_user %}
+                <a class="btn btn-primary glyphs" href="{% url 'mybeerapp:rating_edit' pk=rating.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a class="btn btn-primary glyphs glyphdel" href="{% url 'mybeerapp:rating_delete' pk=rating.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+            {% endif %}
+
+        </div>
 
         {% endfor %}
       </ol>
