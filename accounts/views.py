@@ -44,6 +44,7 @@ def user_login(request):
 
     if request.method == 'POST':
         username=request.POST.get('username')
+        username=username.replace('@','')
         password=request.POST.get('password')
 
         user=authenticate(username=username, password=password)
@@ -60,4 +61,3 @@ def user_login(request):
             return render(request,'accounts/login.html',{'invalid':True})
     else:
         return render(request,'accounts/login.html',{'invalid':False})
-        
