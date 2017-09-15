@@ -51,6 +51,9 @@ class Beer(models.Model):
     def get_absolute_url(self):
         return reverse("mybeerapp:user_beerlist",kwargs={'username':self.user.username})
 
+    class Meta:
+        ordering = ["name"]
+
 
     # def get_absolute_url(self):
     #     return reverse('mybeerapp:details', kwargs={'slug':self.slug,'username':self.user.username,'pk':self.pk})
