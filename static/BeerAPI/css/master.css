@@ -14,6 +14,10 @@ body{
   padding-top: 15px;
 }
 
+.ratedetailbutton{
+  margin-top: 10px;
+}
+
 .introsection .container h3{
   font-size: 1.25em;
 }

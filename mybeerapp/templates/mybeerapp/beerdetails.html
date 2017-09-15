@@ -13,6 +13,12 @@
       {% if beer.ratings.count %}
         <li>Overall User Rating: <a href="{% url 'mybeerapp:rating_details' slug=beer.slug %}">{{beer.total_average}}%</a></li>
       {% endif %}
+
+      <form action="{% url 'mybeerapp:rating' slug=beer.slug %}">
+        {% csrf_token %}
+        <input class="ratedetailbutton" type="submit" name="" value="Rate This Beer">
+      </form>
+
     </ul>
 
   </div>

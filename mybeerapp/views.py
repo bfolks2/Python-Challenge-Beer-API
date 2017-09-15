@@ -80,7 +80,7 @@ class BeerDeleteView(LoginRequiredMixin,DeleteView):
 
 
 @login_required
-def createrating(request):
+def createrating(request, slug=''):
 
     beerflag=False
 
@@ -95,7 +95,11 @@ def createrating(request):
             rating.save()
             return render(request, 'mybeerapp/ratingdetails.html',{'beer':rating.beer})
     else:
-        ratingform=RatingForm()
+        if slug=='':
+            ratingform=RatingForm()
+        else:
+            beerslug=get_object_or_404(Beer, slug=slug)
+            ratingform=RatingForm(initial={'beer': beerslug})
 
     return render (request,'mybeerapp/createrating.html',{'form':ratingform,'beerflag':beerflag})
 
