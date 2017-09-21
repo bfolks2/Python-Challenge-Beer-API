@@ -27,6 +27,7 @@
   <div class="middlesection">
     <div class="container">
       <h2>Below is a list of ALL beers ever created on this site:</h2>
+      <p>(JSON Serialized Beer List <a href="{% url 'mybeerapp:serial' %}">here</a>)</p>
       <ol>
         <div class="table">
           {% for beer in beers %}

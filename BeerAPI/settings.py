@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mybeerapp',
     'accounts',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

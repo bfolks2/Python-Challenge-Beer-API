@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from mybeerapp.models import Beer, Rating
 from mybeerapp.forms import BeerForm, RatingForm
+from mybeerapp.serializers import BeerSerializer
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.auth.models import User
@@ -8,12 +9,14 @@ from django.utils.text import slugify
 from django.db.models.functions import Lower
 
 from django.http import HttpResponse
+from rest_framework.response import Response
 from django.template.loader import render_to_string
 
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 
 from django.views.generic import (ListView, UpdateView, DeleteView)
+from rest_framework.views import APIView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
@@ -21,6 +24,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def index(request):
     beers=Beer.objects.all().order_by('name')
     return render(request, 'index.html', {'beers':beers})
+
+
+class BeerAPIView(APIView):
+    def get(self,request):
+        beers = Beer.objects.all().order_by('name')
+        serializer = BeerSerializer(beers, many=True)
+        return Response(serializer.data)
 
 
 class BeerList(ListView):
