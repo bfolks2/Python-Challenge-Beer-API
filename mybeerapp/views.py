@@ -34,7 +34,7 @@ class BeerAPIView(APIView):
 
 class RatingAPIView(APIView):
     def get(self,request):
-        ratings = Rating.objects.all().order_by('beer')
+        ratings = Rating.objects.all().order_by('beer__name')
         serializer = RatingSerializer(ratings, many=True)
         return Response(serializer.data)
 
