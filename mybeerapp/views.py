@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from mybeerapp.models import Beer, Rating
 from mybeerapp.forms import BeerForm, RatingForm
-from mybeerapp.serializers import BeerSerializer
+from mybeerapp.serializers import BeerSerializer, RatingSerializer
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.auth.models import User
@@ -30,6 +30,12 @@ class BeerAPIView(APIView):
     def get(self,request):
         beers = Beer.objects.all().order_by('name')
         serializer = BeerSerializer(beers, many=True)
+        return Response(serializer.data)
+
+class RatingAPIView(APIView):
+    def get(self,request):
+        ratings = Rating.objects.all().order_by('beer')
+        serializer = RatingSerializer(ratings, many=True)
         return Response(serializer.data)
 
 

@@ -5,7 +5,8 @@ app_name='mybeerapp'
 
 urlpatterns = [
     url(r'^new/$', views.createbeer, name='create'),
-    url(r'^api/$', views.BeerAPIView.as_view(), name='serial'),
+    url(r'^beerapi/$', views.BeerAPIView.as_view(), name='beerserial'),
+    url(r'^ratingapi/$', views.RatingAPIView.as_view(), name='ratingserial'),
     url(r'^rate/(?P<slug>[-\w]+)/$', views.createrating, name='rating'),
     url(r'^rate/$', views.createrating, name='rating'),
     url(r'^by/(?P<username>[-\w]+)/$', views.user_beerlist, name='user_beerlist'),

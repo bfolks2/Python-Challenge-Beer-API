@@ -20,14 +20,15 @@
       If a beer has been rated by any user, that beer listing entry also has an average score link which will show
       the details of each individual score.</h3>
 
-      <h3><em>*Source Code for this application can be found in the footer of this page</em></h3>
+      <h3><strong><em>***Source Code for this application can be found in the footer of this page</em></strong></h3>
 
     </div>
   </div>
   <div class="middlesection">
     <div class="container">
       <h2>Below is a list of ALL beers ever created on this site:</h2>
-      <p>(JSON Serialized Beer List <a href="{% url 'mybeerapp:serial' %}">here</a>)</p>
+      <p>(JSON Serialized Beer and Ratings Lists can be found <a href="{% url 'mybeerapp:beerserial' %}">here</a>
+          and <a href="{% url 'mybeerapp:ratingserial' %}">here</a>, respectively)</p>
       <ol>
         <div class="table">
           {% for beer in beers %}
